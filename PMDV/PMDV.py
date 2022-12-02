@@ -4,6 +4,40 @@ import customtkinter
 
 '''#---Def's'''
 
+#Créditos
+def creditos():
+    
+    j_creditos = customtkinter.CTkToplevel(pmdv)
+    j_creditos.geometry("290x130")
+    j_creditos.title("Créditos")
+    
+    label_creditos1 = customtkinter.CTkLabel(master=j_creditos, text="Criador por:", text_font=("Arial", 12))
+    label_creditos1.grid(column=0, row=0, padx=50, pady=20)
+    label_creditos2 = customtkinter.CTkLabel(master=j_creditos, text="Gabriel Rodrigues Mol", text_font=("Arial", 18))
+    label_creditos2.grid(column=0, row=1, padx=20)
+
+#Resultado seco
+def resolver():
+    
+    #concreto e aço
+    fck = float(cbox_concreto.get())
+    fyk = float(cbox_aco.get())
+    fyk_mpa = fyk*10
+    fcd = fck/1.4 #concreto FCD
+    fyd = fyk_mpa/1.15 #Aço Fyd
+    #outras entry
+    h = float(entry_h.get())
+    bw = float(entry_bw.get())
+    c = float(entry_c.get())
+    mk = float(entry_mk.get())
+    #equações
+    
+    
+    
+    #resultado na label
+    label_resultado.config(text="")
+
+
 
 
 '''Criando App'''
@@ -81,7 +115,7 @@ entry_mk.grid(column=1, row=5, padx=10, pady=10)
 #Botões
 
 #Resultado
-button_resolver = customtkinter.CTkButton(master=lframe, text="Resolver", command="")
+button_resolver = customtkinter.CTkButton(master=lframe, text="Resolver", command=resolver)
 button_resolver.grid(column=0, columnspan=2, row=7, padx=10, pady=10)
 
 #Resultado--mostrado
@@ -93,7 +127,7 @@ button_ajuda = customtkinter.CTkButton(master=lframe, text="Ajuda", command="")
 button_ajuda.grid(column=0, row=9, padx=10, pady=10)
 
 #Créditos
-button_creditos = customtkinter.CTkButton(master=lframe, text="Créditos", command="")
+button_creditos = customtkinter.CTkButton(master=lframe, text="Créditos", command=creditos)
 button_creditos.grid(column=1, row=9, padx=10, pady=10)
 
 
