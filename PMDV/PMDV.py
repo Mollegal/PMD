@@ -1,5 +1,6 @@
 import tkinter
 import customtkinter
+import math
 
 
 '''#---Def's'''
@@ -23,19 +24,31 @@ def resolver():
     fck = float(cbox_concreto.get())
     fyk = float(cbox_aco.get())
     fyk_mpa = fyk*10
-    fcd = fck/1.4 #concreto FCD
-    fyd = fyk_mpa/1.15 #Aço Fyd
+    fcds = (fck/10)/1.4 #concreto FCD
+    fyds = (fyk_mpa/10)/1.15 #Aço Fyd
     #outras entry
     h = float(entry_h.get())
     bw = float(entry_bw.get())
     c = float(entry_c.get())
     mk = float(entry_mk.get())
-    #equações
+    #aredondamento
+    fcd = round(fcds, 2)
+    fyd = round(fyds, 2)
+    
+    '''equações'''
+    
+    mds = mk*1.4*100 #100 para transformar em Kn.cm
+    md = round(mds, 2)
+    d = h - c
+    
+    xs = 1.25*d*(1-(math.sqrt((1-(md/(0.425*bw*(d**2)*fcd))))))
+    x = round(xs, 2)
+    aaço = (md/((d-0.4*x)*(fyd)))
     
     
     
     #resultado na label
-    label_resultado.config(text="")
+    label_resultado.config(text=round(aaço, 2))
 
 
 
