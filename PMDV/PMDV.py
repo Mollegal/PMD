@@ -46,7 +46,6 @@ def resolver():
     aaço = (md/((d-0.4*x)*(fyd)))
     
     
-    
     #resultado na label
     label_resultado.config(text=round(aaço, 2))
 
