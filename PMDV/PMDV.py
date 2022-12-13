@@ -61,16 +61,21 @@ def resolver():
     
     xs = 1.25*d*(1-(math.sqrt((1-(md/(0.425*bw*(d**2)*fcd))))))
     x = round(xs, 2)
-    aaço = (md/((d-0.4*x)*(fyd)))
+    aaço = round((md/((d-0.4*x)*(fyd))), 2)
     
     
     #resultado na label
-    label_resultado.config(text=round(aaço, 2))
+    label_resultado.config(text="As = "+str(aaço)+"cm²")
     #resultado dframe
-    labelentradas.config(text="h="+str(h)+"cm"+" - bw="+str(bw)+"cm"+" - c="+str(c)+"cm"+" - mk="+str(mk)+"KN.m")
+    labelentradas.config(text="h= "+str(h)+"cm"+" - bw= "+str(bw)+"cm"+" - c= "+str(c)+"cm"+" - mk= "+str(mk)+"KN.m")
     labelfcd.config(text="fcd= ("+str(fck) +"/10)/1.4 = "+str(fcd)+"KN/cm²")
     labelfyd.config(text="fyd= "+ str(fyk)+"/1.15 = "+str(fyd)+"KN/cm²")
     labelmd.config(text="Md= "+str(mk)+" x 1.4 x 100 = "+str(md)+"KN.cm")
+    labeld.config(text="d= "+str(h)+" - "+str(c)+" = "+str(d)+"cm")
+    labelx.config(text="x= 1.25 x "+str(d)+" x (1 - √ 1 - ("+str(md)+"/(0.425 x "+str(bw)+" x "+str(d)+"² x "+str(fcd)+")) = "+str(x)+"cm")
+    labelas.config(text="As= "+str(md)+"/("+str(d)+" - 0.4 x "+str(x)+") x "+str(fyd)+" = "+str(aaço)+"cm²")
+    labelre.config(text="A área da secção de aço calculada foi:")
+    labelref.config(text=str(aaço)+"cm²")
 
 
 
@@ -84,8 +89,8 @@ customtkinter.set_default_color_theme("blue")
 #Criando App-->
 
 pmdv = customtkinter.CTk()
-pmdv.geometry("800x500")
-pmdv.title("Programa Mol de Dimensionamento de Vigas")
+pmdv.geometry("850x500")
+pmdv.title("PMDV")
 
 '''Frames'''
 
@@ -153,7 +158,7 @@ button_resolver = customtkinter.CTkButton(master=lframe, text="Resolver", comman
 button_resolver.grid(column=0, columnspan=2, row=7, padx=10, pady=10)
 
 #Resultado--mostrado
-label_resultado = customtkinter.CTkLabel(master=lframe, text="")
+label_resultado = customtkinter.CTkLabel(master=lframe, text="", text_font=("Arial", 12))
 label_resultado.grid(column=0, columnspan=2, row=8, padx=10, pady=10)
 
 #Ajuda
@@ -171,14 +176,31 @@ button_creditos.grid(column=1, row=9, padx=10, pady=10)
 labelentradas = customtkinter.CTkLabel(master=dframe, text="", text_font=("Arial", 12))
 labelentradas.grid(column=0, columnspan=2, row=0, padx=10, pady=10)
 
-#fcd e fyd
+#fcd e fyd e d
 labelfcd = customtkinter.CTkLabel(master=dframe, text="", text_font=("Arial", 12))
 labelfcd.grid(column=0, row=1, padx=10, pady=10)
 labelfyd = customtkinter.CTkLabel(master=dframe, text="", text_font=("Arial", 12))
 labelfyd.grid(column=1, row=1, padx=10, pady=10)
+labeld = customtkinter.CTkLabel(master=dframe, text="", text_font=("Arial", 12))
+labeld.grid(column=0, columnspan=2, row=2, padx=10, pady=10)
 
 #Md
 labelmd = customtkinter.CTkLabel(master=dframe, text="", text_font=("Arial", 12))
-labelmd.grid(column=0, row=2, padx=10, pady=10)
+labelmd.grid(column=0,columnspan=2, row=3, padx=10, pady=10)
+
+#x(Ln)
+labelx = customtkinter.CTkLabel(master=dframe, text="", text_font=("Arial", 12))
+labelx.grid(column=0,columnspan=2, row=4, padx=10, pady=10)
+
+#As
+labelas = customtkinter.CTkLabel(master=dframe, text="", text_font=("Arial", 12))
+labelas.grid(column=0,columnspan=2, row=5, padx=10, pady=10)
+
+#labels finais
+labelre = customtkinter.CTkLabel(master=dframe, text="", text_font=("Arial", 16), justify="center")
+labelre.grid(column=0,columnspan=2, row=6, padx=10, pady=10)
+labelref = customtkinter.CTkLabel(master=dframe, text="", text_font=("Arial", 22))
+labelref.grid(column=0,columnspan=2, row=7, padx=10, pady=15)
+
 
 pmdv.mainloop()
