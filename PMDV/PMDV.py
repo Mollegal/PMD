@@ -1,6 +1,9 @@
 import tkinter
 import customtkinter
+import os
+from PIL import ImageTk, Image
 import math
+
 
 
 '''#---Def's'''
@@ -16,6 +19,21 @@ def creditos():
     label_creditos1.grid(column=0, row=0, padx=50, pady=20)
     label_creditos2 = customtkinter.CTkLabel(master=j_creditos, text="Gabriel Rodrigues Mol", text_font=("Arial", 18))
     label_creditos2.grid(column=0, row=1, padx=20)
+
+#Ajuda
+def ajuda():
+    
+    
+    j_ajuda = customtkinter.CTkToplevel(pmdv)
+    j_ajuda.geometry("1200x600")
+    j_ajuda.title("Ajuda")
+    
+    pastaApp = os.path.dirname(__file__)
+    img = ImageTk.PhotoImage(Image.open(pastaApp+"\\teste.jpg"))
+    imglabel = customtkinter.CTkLabel(master=j_ajuda, image=img)
+    imglabel.pack()
+    
+
 
 #Resultado seco
 def resolver():
@@ -48,7 +66,11 @@ def resolver():
     
     #resultado na label
     label_resultado.config(text=round(aaço, 2))
-
+    #resultado dframe
+    labelentradas.config(text="h="+str(h)+"cm"+" - bw="+str(bw)+"cm"+" - c="+str(c)+"cm"+" - mk="+str(mk)+"KN.m")
+    labelfcd.config(text="fcd= ("+str(fck) +"/10)/1.4 = "+str(fcd)+"KN/cm²")
+    labelfyd.config(text="fyd= "+ str(fyk)+"/1.15 = "+str(fyd)+"KN/cm²")
+    labelmd.config(text="Md= "+str(mk)+" x 1.4 x 100 = "+str(md)+"KN.cm")
 
 
 
@@ -119,7 +141,7 @@ entry_c = customtkinter.CTkEntry(master=lframe, justify="center")
 entry_c.grid(column=0, row=5, padx=10, pady=10)
 
 #Mk
-label_mk = customtkinter.CTkLabel(master=lframe, text="Mk (N.m)")
+label_mk = customtkinter.CTkLabel(master=lframe, text="Mk (KN.m)")
 label_mk.grid(column=1, row=4, padx=10, pady=10)
 entry_mk = customtkinter.CTkEntry(master= lframe, justify="center")
 entry_mk.grid(column=1, row=5, padx=10, pady=10)
@@ -135,7 +157,7 @@ label_resultado = customtkinter.CTkLabel(master=lframe, text="")
 label_resultado.grid(column=0, columnspan=2, row=8, padx=10, pady=10)
 
 #Ajuda
-button_ajuda = customtkinter.CTkButton(master=lframe, text="Ajuda", command="")
+button_ajuda = customtkinter.CTkButton(master=lframe, text="Ajuda", command=ajuda)
 button_ajuda.grid(column=0, row=9, padx=10, pady=10)
 
 #Créditos
@@ -143,5 +165,20 @@ button_creditos = customtkinter.CTkButton(master=lframe, text="Créditos", comma
 button_creditos.grid(column=1, row=9, padx=10, pady=10)
 
 
+'''Frame Direita'''
+
+#entradas
+labelentradas = customtkinter.CTkLabel(master=dframe, text="", text_font=("Arial", 12))
+labelentradas.grid(column=0, columnspan=2, row=0, padx=10, pady=10)
+
+#fcd e fyd
+labelfcd = customtkinter.CTkLabel(master=dframe, text="", text_font=("Arial", 12))
+labelfcd.grid(column=0, row=1, padx=10, pady=10)
+labelfyd = customtkinter.CTkLabel(master=dframe, text="", text_font=("Arial", 12))
+labelfyd.grid(column=1, row=1, padx=10, pady=10)
+
+#Md
+labelmd = customtkinter.CTkLabel(master=dframe, text="", text_font=("Arial", 12))
+labelmd.grid(column=0, row=2, padx=10, pady=10)
 
 pmdv.mainloop()
